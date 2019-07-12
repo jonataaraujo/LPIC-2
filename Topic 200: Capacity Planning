@@ -1,0 +1,111 @@
+### Comando iostat - Estatísticas de IO (Entrada e saída) do uso de disco
+
+AVG-CPU
+%user = Tempo de uso de CPU a nível do usuário
+%nice = Tempo de uso de CPU de processos priorizados
+%system = Tempo de uso de CPU a nível do S.O Kernel
+%iowait = Quanto tempo a CPU aguardou por algum processo
+%steal = Tempo de CPU virtual esperando a CPU real
+%idle = CPU Livre
+
+Device
+tps = transferencias por segundos
+kb_read/s = Lidos por segundos
+kb_wrtn/s = Escritos por segundos
+kb_read = Total lidos
+kb_wrtn = Total escritos
+
+iostat -m = mostra em megabyts
+iostat -c = mostra CPU
+iostat -p = mostra particoes
+iostat -c 2 = relatorio a cada 2 segundos (Primeiro desde quando ligou, depois a cada 2 segundos)
+iostat -c 2 5 = relatorio a cada 2 segundos e 5 vezes
+
+### Comando netstat - Estatísticas de processos de rede
+
+Pârametros: 
+
+-r = tabela de roteamento
+-n = não resolve nome
+-t = TCP
+-u = UDP
+-p = PID (nome do programa)
+
+### Comando w - Mostra usuários logados (terminal)
+
+pts - terminal remoto
+tty - terminal local
+
+
+Comando fuser -k /dev/pts/3 = Derruba o usuário logado
+fuser - identify processes using files or sockets
+
+
+### Comando top - Mostra processos em execução e gerencia os processos
+
+-k = mata um processo
+
+### Comando vmstat - Mostra estatísticas de memoria
+
+Itens da saída vmstat padrão:
+
+r = fila do processador que está sendo processado
+b = estado de processo bloqueado, dormente  (uninterruptible sleep).
+swpd = uso de swap
+system = uso do sistema
+cpu = uso de CPU
+
+-a = default
+-s = mostra as estatísticas 
+-d = info do disco
+-D = mostra as estatísticas do disco
+-p = mostra estatísticas de uma partição
+
+vmstat 2 - A cada 2 segundos
+vmstat 2 4 - A cada 2 segundos 4 vezes
+
+### Comando mpstat - Semelhante ao vmstat, porém mais detalhado
+
+### Comando pstree - Mostra a arvore de processo em execução (pai, filho, neto)
+
+pstree = ps -axf
+
+### Comando ps - Relatório dos processos rodando no momento.
+
+-a = todos os processos de todos os usuários
+-x = não depende de terminal
+-u = mostra o usuário responsável pelo processo
+-w = mostra o nome do processo completo
+
+### Comando lsof - Mostra o arquivo que está sendo usado por determinado processo
+
+### Comando uptime - Mostra o tempo que o servidor esta UP
+
+### Comando sar - Mostra o histórico do uso de recursos do sistema (Memória, CPU, swap) Padrão a cada 10 minutos.
+
+Para habilitar, no arquivo /etc/default/systat
+ENABLED="true"
+
+Serviço que deve ser iniciado = systemctl start sysstat.service
+Checar status do serviço = systemctl status sysstat.service
+Habilitar no boot = systemctl enable sysstat.service
+
+Tem uma entrada na cron /etc/cron.d/sysstat
+
+Onde guarda os logs?
+
+/var/log/sysstat = No Debian
+/var/log/sa = No centos
+
+# Opções
+
+sar -u = Todos os dados
+sar -r = Dados de memória
+sar -s = Dados de Swap
+sar -n DEV = Dados da interface de rede
+sar -d = escrita em disco
+sar -D = Dados de paginação
+sar -f sa10 = Dados do dia 10
+sar -r -f sa8 = Dados de memoria do dia 8
+sar -u 2 = A cada 2 segundos
+sar -u 2 5 = A cada 2 segundos e 5 vezes
