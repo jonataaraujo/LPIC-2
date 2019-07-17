@@ -1,0 +1,46 @@
+Nesse tópico 200.2, é abordado o conhecimento de ferramentas de monitoramento para prever necessidades futuras de recursos.
+
+Abaixo estão as soluções de monitoramento.
+
+## Icinga2
+
+Sistema de monitoramento de código aberto que verifica a disponibilidade de seus recursos de rede, notifica os usuários sobre interrupções e gera dados de desempenho para relatórios.
+
+Escalonável e extensível, pode monitorar ambientes grandes e complexos em vários locais.
+
+O software e a documentação são licenciadas sob os termos da GNU General Public License Versão 2.
+
+Link: https://icinga.com
+
+## Nagios
+
+Nagios é uma popular aplicação de monitoramento de rede de código aberto distribuída sob a licença GPL.
+Ele pode monitorar tanto hosts quanto serviços, alertando quando ocorrerem problemas e também quando os problemas são resolvidos.
+
+Link: https://www.nagios.org
+
+## collectd
+
+O collectd é um daemon do Unix que coleta, transfere e armazena dados de desempenho de computadores e equipamentos de rede. 
+
+Os dados adquiridos destinam-se a ajudar os administradores de sistemas a manter uma visão geral dos recursos disponíveis para detectar afunilamentos existentes ou iminentes.
+
+Links: https://www.digitalocean.com/community/tutorials/how-to-configure-collectd-to-gather-system-metrics-for-graphite-on-ubuntu-14-04
+https://linux.die.net/man/1/collectd
+https://collectd.org
+
+## MRTG
+
+O Multi Router Traffic Grapher é uma ferramenta de monitoração que gera páginas HTML com gráficos de dados coletados a partir de SNMP ou scripts externos.
+
+É conhecido principalmente pelo seu uso na monitoração de tráfego de rede, mas pode monitorar qualquer coisa desde que o host forneça os dados via SNMP ou script.
+
+Links: https://oss.oetiker.ch/mrtg/
+https://pplware.sapo.pt/microsoft/windows/mrtg-o-trafego-da-sua-rede-em-grafico/
+
+## Cacti
+
+Cacti é uma ferramenta software livre administrativa de rede, que recolhe e exibe informações sobre o estado de uma rede de computadores através de gráficos, 
+permitindo o monitoramento e gerenciamento de redes simples até redes complexas, com centenas de dispositivos.
+
+Links: https://www.cacti.net
