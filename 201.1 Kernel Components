@@ -1,0 +1,83 @@
+Nesse tópico é abordado os componentes do kernerl.
+
+O que é Kernel?
+R: Kernel é o componente central de um sistema operacional, que é a parte principal de um computador.
+Uma simples alteração da versão do Kernel para uma mais antiga ou mais atual pode ser suficiente para resolver problemas de hardware e também de compatibilidade no computador.
+O Kernel pode ser descrito como um grande organizador.
+Ele o responsável por garantir que todos os programas terão acesso aos recursos de que necessitam (memória RAM, por exemplo) simultaneamente,
+fazendo com que haja um compartilhamento concorrente – mas sem oferecer riscos à integridade da máquina.
+
+## Tipos de kernel
+
+Existe dois modelos, Kernel monolítico e micro-kernel.
+
+https://pt.stackoverflow.com/questions/114911/quais-as-diferenças-entre-kernel-e-micro-kernel
+
+O kernel Linux é monolítico modular,
+
+## Documentação do Kernel.
+
+O caminho da documentação do kernel fica em:
+
+/usr/src/linux/Documentation/
+
+OBS: Lembrando que não é o manpage.
+
+## Localização
+
+Os arquivos fontes do kernel ficam armazenados no diretório:
+
+/usr/src
+
+Dentro desse diretório é comun encontrar várias versões, é recomendado criar um link simbólico /usr/src/linux para a versão 
+do kernel em uso.
+
+$ ln -s linux-version linux
+
+Para consultar a versão atual, pode ser chamado o comando abaixo:
+
+$ uname -r
+
+## Formato XZ
+
+Os arquivos fontes do kernel são compactadas usando tar e compactadas usando o método de compactação XZ.
+
+O XZ é o sucessor do LZMA e do LZMA2.
+
+O código fonte do kernel pode ser baixado no endereço:
+https://www.kernel.org/
+
+Os arquivos são em linguagem C e arquivos em H (headers).
+
+## Versões do Kernel
+
+Composta por quatro números no formato A.B.C.D.
+
+OBS: O elemento D nem sempre é utilizado, mas tem função muito importante.
+
+A - Versão Principal
+B - Número de revisão principal
+C - Número de revisão secundário
+D - Correções urgentes
+
+No dia 23/07/2019 às 22:22 a versão estável do kernel era 5.2.2
+
+## Sufixos do kernel
+
+O kernel ainda pode possuir um sufixo que representea um kernel diferente do oficial, esse sufixo é chamado de VANILLA.
+
+Os sufixos mais comuns são RC e MM.
+
+RC - Release candidate, seria um prepatch, versão alfa do kernel.
+MM - Modificações feitas pelo DEV Andrew Morton.
+zImage - limite de tamanho, 512K, fica na memória baixa
+
+bzImage - não tem limite de tamanho, usado atualmente, fica na memória alta
+ambos comprimido em gzip
+
+/lib/modules pasta módulos, cada pasta de cada versão
+
+arquivos .ko - indica que é um módulo
+
+Tanto o zImage quanto o bzImage usam compactação gzip. 
+O “bz” em bzImage se refere a “big zImage” - não ao algoritmo de compressão “bzip”.
