@@ -1,3 +1,9 @@
+Nesse tópico 201.2, é abordado o conhecimento de como manusear corretamente um kernel. 
+Seja incluir ou desativar recursos específicos do kernel, compilar, recompilar, atualizar e analisar as alterações em um novo kernel. 
+Também é abordado criar uma imagem initrd e instalar novos kernels.
+
+Let's go ...
+
 make menuconfig - abre um menu
 
 * = Habilitado, dentro do kernel, built-in
