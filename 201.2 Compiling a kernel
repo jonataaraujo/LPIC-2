@@ -1,0 +1,34 @@
+make menuconfig - abre um menu
+
+* = Habilitado, dentro do kernel, built-in
+
+< > = desativado
+
+<M> = modular, não fica em memória, somente sobe o módulo
+
+salva como arquivo .config as configurações
+
+make oldconfig = restaura uma configuração antiga
+
+make xconfig = interface gráfica QT
+
+make gconfig = interface gráfica GTK
+
+Makefile = já vem, mostra as configurações e opções.
+Possibilidade de alterar o item extraversion.
+
+EXTRAVERSION = Adiciona uma nova numeração
+
+No arquivo .conf, LOCALVERSION = Adiciona um novo prefixo (nome) na copilacao.
+
+make = copila o código fonte
+
+make bzImage = copila e gera uma imagem
+
+make -j2 = gera dois processos ao mesmo tempo de copilação
+
+make -j2 modules = copila os módulos
+
+make clean = limpa a copilação, mas mantem o .conf
+
+make mrproper = limpa os arquivos da copilacao , todos, .conf e modulos
