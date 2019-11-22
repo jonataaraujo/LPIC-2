@@ -1,0 +1,6 @@
+Description: Candidates should be able to properly manipulate a Linux system during both the boot process and during recovery mode.
+This objective includes using both the init utility and init-related kernel options.
+Candidates should be able to determine the cause of errors in loading and usage of bootloaders.
+GRUB version 2 and GRUB Legacy are the bootloaders of interest.
+Both BIOS and UEFI systems are covered.
+
