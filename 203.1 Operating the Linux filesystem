@@ -1,0 +1,12 @@
+Description: Candidates should be able to properly configure and navigate the standard Linux filesystem.
+This objective includes configuring and mounting various filesystem types.
+
+Terms and Utilities:
+/etc/fstab
+/etc/mtab
+/proc/mounts
+mount and umount
+blkid
+sync
+swapon
+swapoff
