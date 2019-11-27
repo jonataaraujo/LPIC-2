@@ -1,0 +1,14 @@
+Peso: 3
+
+Descrição: Candidates should be able to properly maintain a Linux filesystem using system utilities. 
+This objective includes manipulating standard filesystems and monitoring SMART devices.
+
+Terms and Utilities:
+
+mkfs (mkfs.*)
+mkswap
+fsck (fsck.*)
+tune2fs, dumpe2fs and debugfs
+btrfs, btrfs-convert
+xfs_info, xfs_check, xfs_repair, xfsdump and xfsrestore
+smartd, smartctl									
