@@ -1,5 +1,5 @@
 # LPIC-2
-Esse tópico é destinado para o registro dos estudos para a LPIC-2
+Esse tópico é destinado para o registro dos estudos para a LPIC-2 na versão 4.5 (Exam code 201-450).
 
 # Peso dos tópicos:
 
