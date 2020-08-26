@@ -1,3 +1,5 @@
+Instalar o pacote systat e net-tools
+
 ### Comando iostat - Estatísticas de IO (Entrada e saída) do uso de disco
 
 Report Central Processing Unit (CPU) statistics and input/output statistics for devices and partitions.
@@ -23,36 +25,6 @@ iostat -p = mostra particoes
 iostat -c 2 = relatorio a cada 2 segundos (Primeiro desde quando ligou, depois a cada 2 segundos)
 iostat -c 2 5 = relatorio a cada 2 segundos e 5 vezes
 
-### Comando netstat - Estatísticas de processos de rede
-
-Print network connections, routing tables, interface statistics, masquerade connections, and multicast
-
-Pârametros: 
-
--r = tabela de roteamento
--n = não resolve nome
--t = TCP
--u = UDP
--p = PID (nome do programa)
-
-### Comando w - Mostra usuários logados (terminal)
-
-Show who is logged on and what they are doing.
-
-pts - terminal remoto
-tty - terminal local
-
-### Comando fuser - Utilitário que permite descobrir quais processos estão usando um arquivo, um diretório ou até mesmo um socket.
-Além disso, o comando também retorna informações sobre o proprietário do processo e o tipo de acesso a ele.
-
-Identify processes using files or sockets
-
-fuser -k /dev/pts/3 = Derruba o usuário logado
-
-### Comando top - Mostra processos em execução e gerencia os processos
-
--k = mata um processo
-
 ### Comando vmstat - Mostra estatísticas de memoria
 
 Report virtual memory statistics
@@ -72,34 +44,26 @@ cpu = uso de CPU
 vmstat 2 - A cada 2 segundos
 vmstat 2 4 - A cada 2 segundos 4 vezes
 
-### Comando mpstat - Semelhante ao vmstat, porém mais detalhado
+### Comando mpstat - Semelhante ao vmstat, porém mais detalhado.
 
-### Comando pstree - Mostra a arvore de processo em execução (pai, filho, neto)
-
-display a tree of processes
-
-pstree = ps -axf
-
-### Comando ps - Mostra os processos em execução
-
-report a snapshot of the current processes.
-
--a = todos os processos de todos os usuários
--x = não depende de terminal
--u = mostra o usuário responsável pelo processo
--w = mostra o nome do processo completo
-
-### Comando lsof - Mostra o arquivo que está sendo usado por determinado processo
-
-list open files
-
-### Comando uptime - Mostra o tempo que o servidor esta UP
-
-Tell how long the system has been running.
-
-### Comando sar - Mostra o histórico do uso de recursos do sistema (Memória, CPU, swap) Padrão a cada 10 minutos.
+### Comando sar - Mostra o histórico do uso de recursos do sistema (Memória, CPU, swap).
 
 Collect, report, or save system activity information.
+
+Coleta os dados a cada 10 minutos (default na crontab /etc/cron.d/sysstat).
+
+OBS: No debian, é necessário ativar para true o status em /etc/default/sysstat e ativar o serviço.
+
+$ sudo systemctl enable sysstat.service
+
+$ sudo systemctl start sysstat.service
+
+No Centos, o binário coletor é o sa1
+No Debian, o binário coletor é debian-sa1
+
+Diretório de armazenamento no debian: /var/log/sysstat
+
+Diretório de armazenamento no Centos: /var/log/sa
 
 sar -u = Todos os dados
 sar -r = Dados de memória
@@ -111,3 +75,66 @@ sar -f sa10 = Dados do dia 10
 sar -r -f sa8 = Dados de memoria do dia 8
 sar -u 2 = A cada 2 segundos
 sar -u 2 5 = A cada 2 segundos e 5 vezes
+
+### Comando netstat - Estatísticas de processos de rede, pega as informações do /proc.
+
+Print network connections, routing tables, interface statistics, masquerade connections, and multicast
+
+Pârametros: 
+
+-i = Informações de rede
+-s = Informações por protocolo de rede
+-a = Todos os sockets
+-r = tabela de roteamento
+-n = não resolve nome
+-t = TCP
+-u = UDP
+-p = PID (nome do programa)
+
+### Comando ss - Estatísticas de processos de rede atualmente, pega informações na memoria do kernel.
+
+### Comando ps - Mostra os processos em execução
+
+report a snapshot of the current processes.
+
+-a = todos os processos de todos os usuários
+-x = não depende de terminal
+-u = mostra o usuário responsável pelo processo
+-w = mostra o nome do processo completo
+
+### Comando w - Mostra usuários logados (terminal)
+
+Show who is logged on and what they are doing.
+
+pts - terminal remoto
+tty - terminal local
+
+### Comando fuser - Utilitário que permite descobrir quais processos estão usando um arquivo, um diretório ou até mesmo um socket.
+Além disso, o comando também retorna informações sobre o proprietário do processo e o tipo de acesso a ele.
+
+Identify processes using files or sockets
+
+fuser -k /dev/pts/3 = Derruba o usuário logado
+
+### Comando top - Mostra processos em execução e gerencia os processos
+
+-k = mata um processo
+
+
+### Comando pstree - Mostra a arvore de processo em execução (pai, filho, neto)
+
+display a tree of processes
+
+pstree = ps -axf
+
+
+
+### Comando lsof - Mostra o arquivo que está sendo usado por determinado processo
+
+list open files
+
+### Comando uptime - Mostra o tempo que o servidor esta UP
+
+Tell how long the system has been running.
+
+
