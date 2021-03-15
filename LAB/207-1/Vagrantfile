@@ -1,0 +1,52 @@
+Vagrant.configure("2") do |config|
+    config.vm.define "dns-server-centos" do |centos|
+    centos.vm.box = "centos/7"
+    centos.vm.hostname = 'dns-server-centos'
+    centos.vm.network "public_network", ip: "192.168.15.150"
+
+    centos.vm.provision "shell", inline: <<-SHELL
+       sudo timedatectl set-timezone America/Sao_Paulo
+       sudo yum install bind bind-utils net-tools -y
+       sudo systemctl start named
+    SHELL
+
+
+    centos.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--memory", 512]
+      v.customize ["modifyvm", :id, "--name", "dns-server-centos"]
+    end
+  end
+    config.vm.define "dns-server-debian" do |debian|
+    debian.vm.box = "debian/buster64"
+    debian.vm.hostname = 'dns-server-debian'
+    debian.vm.network "public_network", ip: "192.168.15.151"
+
+    debian.vm.provision "shell", inline: <<-SHELL
+       sudo timedatectl set-timezone America/Sao_Paulo
+       sudo apt update
+       sudo apt install bind9 dnsutils -y
+    SHELL
+
+    debian.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--memory", 512]
+      v.customize ["modifyvm", :id, "--name", "dns-server-debian"]
+    end 
+  end
+
+    config.vm.define "dns-client-debian" do |debian2|
+    debian2.vm.box = "debian/buster64"
+    debian2.vm.hostname = 'dns-client-debian'
+    debian2.vm.network "public_network", ip: "192.168.15.152"
+
+    debian2.vm.provision "shell", inline: <<-SHELL
+       sudo timedatectl set-timezone America/Sao_Paulo
+       sudo apt update
+       sudo apt install dnsutils -y
+    SHELL
+
+    debian2.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--memory", 512]
+      v.customize ["modifyvm", :id, "--name", "dns-client-debian"]
+    end 
+  end
+end
