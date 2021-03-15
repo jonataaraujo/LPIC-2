@@ -1,0 +1,48 @@
+Vagrant.configure("2") do |config|
+    config.vm.define "server-nginx" do |centos|
+    centos.vm.box = "centos/7"
+    centos.vm.hostname = 'server-nginx'
+    centos.vm.network "public_network", ip: "192.168.15.150", bridge: "en4: Thunderbolt Ethernet"
+    centos.vm.provision "shell", inline: <<-SHELL
+       sudo timedatectl set-timezone America/Sao_Paulo
+       sudo yum install tmux nginx php-fpm -y
+    SHELL
+    centos.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--memory", 256]
+      v.customize ["modifyvm", :id, "--name", "server-nginx"]
+    end
+  end
+
+    config.vm.define "server-apache-01" do |debian|
+    debian.vm.box = "debian/buster64"
+    debian.vm.hostname = 'server-apache-01'
+    debian.vm.network "public_network", ip: "192.168.15.151", bridge: "en4: Thunderbolt Ethernet"
+
+    debian.vm.provision "shell", inline: <<-SHELL
+       sudo timedatectl set-timezone America/Sao_Paulo
+       sudo apt update
+       sudo apt install tmux apache2 -y
+       sudo echo "server-apache-01" > /var/www/html/index.html
+    SHELL
+    debian.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--memory", 256]
+      v.customize ["modifyvm", :id, "--name", "server-apache-01"]
+    end 
+  end
+
+    config.vm.define "server-apache-02" do |debian2|
+    debian2.vm.box = "debian/buster64"
+    debian2.vm.hostname = 'server-apache-02'
+    debian2.vm.network "public_network", ip: "192.168.15.152", bridge: "en4: Thunderbolt Ethernet"
+    debian2.vm.provision "shell", inline: <<-SHELL
+       sudo timedatectl set-timezone America/Sao_Paulo
+       sudo apt update
+       sudo apt install tmux apache2 -y
+       sudo echo "server-apache-02" > /var/www/html/index.html
+    SHELL
+   debian2.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--memory", 256]
+      v.customize ["modifyvm", :id, "--name", "server-apache-02"]
+    end 
+  end
+end
