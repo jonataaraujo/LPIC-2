@@ -1,0 +1,36 @@
+Vagrant.configure("2") do |config|
+    config.vm.define "servidor-nfs" do |debian|
+    debian.vm.box = "debian/buster64"
+    debian.vm.hostname = 'servidor-nfs'
+    debian.vm.network "public_network", ip: "192.168.15.150", bridge: "en4: Thunderbolt Ethernet"
+
+    debian.vm.provision "shell", inline: <<-SHELL
+       sudo timedatectl set-timezone America/Sao_Paulo
+       sudo apt update
+       sudo apt install tmux nfs-kernel-server -y
+       sudo echo "/var/log 192.168.15.0/24(ro,sync,no_subtree_check)" >> /etc/exports
+       sudo exportfs -a
+    SHELL
+    debian.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--memory", 256]
+      v.customize ["modifyvm", :id, "--name", "servidor-nfs"]
+     end
+    end
+
+    config.vm.define "cliente-nfs" do |debian|
+    debian.vm.box = "debian/buster64"
+    debian.vm.hostname = 'cliente-nfs'
+    debian.vm.network "public_network", ip: "192.168.15.151", bridge: "en4: Thunderbolt Ethernet"
+
+    debian.vm.provision "shell", inline: <<-SHELL
+       sudo timedatectl set-timezone America/Sao_Paulo
+       sudo apt update
+       sudo apt install tmux nfs-common -y
+       sudo mount -t nfs 192.168.15.150:/var/log /mnt/
+    SHELL
+    debian.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--memory", 256]
+      v.customize ["modifyvm", :id, "--name", "cliente-nfs"]
+    end
+  end
+end
