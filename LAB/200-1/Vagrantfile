@@ -1,0 +1,31 @@
+Vagrant.configure("2") do |config|
+    config.vm.define "Centos" do |centos|
+    centos.vm.box = "centos/7"
+    centos.vm.hostname = 'Centos'
+    centos.vm.network "public_network", ip: "192.168.3.150"
+
+    centos.vm.provision "shell", inline: <<-SHELL
+       sudo timedatectl set-timezone America/Sao_Paulo
+       sudo yum install sysstat -y
+    SHELL
+    centos.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--memory", 512]
+      v.customize ["modifyvm", :id, "--name", "Centos"]
+    end
+  end
+    config.vm.define "Debian" do |debian|
+    debian.vm.box = "debian/buster64"
+    debian.vm.hostname = 'Debian'
+    debian.vm.network "public_network", ip: "192.168.3.151"
+
+    debian.vm.provision "shell", inline: <<-SHELL
+       sudo timedatectl set-timezone America/Sao_Paulo
+       sudo apt-get install sysstat -y
+    SHELL
+
+    debian.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--memory", 512]
+      v.customize ["modifyvm", :id, "--name", "Debian"]
+    end 
+ end
+end
