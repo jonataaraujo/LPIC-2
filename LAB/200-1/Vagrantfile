@@ -7,6 +7,7 @@ Vagrant.configure("2") do |config|
     centos.vm.provision "shell", inline: <<-SHELL
        sudo timedatectl set-timezone America/Sao_Paulo
        sudo yum install sysstat -y
+       sudo yum install net-tools -y
     SHELL
     centos.vm.provider :virtualbox do |v|
       v.customize ["modifyvm", :id, "--memory", 512]
@@ -21,6 +22,7 @@ Vagrant.configure("2") do |config|
     debian.vm.provision "shell", inline: <<-SHELL
        sudo timedatectl set-timezone America/Sao_Paulo
        sudo apt-get install sysstat -y
+       sudo apt-get install net-tools -y
     SHELL
 
     debian.vm.provider :virtualbox do |v|
